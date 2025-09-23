@@ -162,4 +162,4 @@ The full academic report with detailed methodology, results, and comparison is a
 
 ---
 
-✍️ **Author**: Onour Imprachim
+✍️  Onour Imprachim
