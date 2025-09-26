@@ -1,5 +1,7 @@
 # Text Classification with Naive Bayes (Python & RapidMiner)
-
+![Python](https://img.shields.io/badge/Python-3.9-blue)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-0.24-orange)
+![RapidMiner](https://img.shields.io/badge/RapidMiner-Text_Processing-yellowgreen)
 ## 📌 Project Description
 This project explores **text classification** using the **Naive Bayes algorithm**, implemented in two different environments:  
 - **Python (scikit-learn)**  
