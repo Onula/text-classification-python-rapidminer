@@ -6,42 +6,7 @@ This project explores **text classification** using the **Naive Bayes algorithm*
 - **RapidMiner (Text Processing extension)**  
 
 Both **Multinomial Naive Bayes** (term occurrences) and **Bernoulli Naive Bayes** (binary term occurrences) were tested.  
-The aim was to compare their performance in terms of **accuracy, precision, recall, F1-score, and execution time**.
-
----
-
-## 🛠️ Tools & Technologies
-- **Python 3.10+**
-- **scikit-learn**
-- **RapidMiner**
-- **Jupyter Notebook / .py scripts**
-- **Word/PDF report with results**
-
----
-
-## 📂 Repository Structure
-```
-text-classification-python-rapidminer/
-│
-├── code/                   # Python scripts and notebooks
-├── report/                 # Project report (PDF & DOCX)
-├── results/                # Confusion matrices, tables, metrics
-└── README.md               # Project documentation
-```
-
----
-
-## 📖 Table of Contents
-1. [Introduction](#introduction)
-2. [Features](#features)
-3. [Requirements](#requirements)
-4. [Directory Structure](#directory-structure)
-5. [Detailed Function Explanation](#detailed-function-explanation)
-6. [Usage Instructions](#usage-instructions)
-7. [Example Results](#example-results)
-8. [Results Summary](#results-summary)
-9. [Report](#report)
-10. [References](#references)
+The aim was to compare their performance in terms of **accuracy, precision, recall, F1-score, and execution time**
 
 ---
 
