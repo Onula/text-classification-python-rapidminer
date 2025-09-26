@@ -6,21 +6,21 @@ from sklearn.naive_bayes import MultinomialNB, BernoulliNB
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 
-# Λειτουργία για φόρτωση κειμένων από φακέλους και κατηγοριοποίησή τους
+# Function to load texts from folders and assign categories
 def load_data_from_folders(category_folders):
     texts = []
     labels = []
     
-    # Για κάθε κατηγορία, φορτώνουμε τα αρχεία .txt και προσθέτουμε τα κείμενα και τις ετικέτες
+    # For each category, load .txt files and add texts and labels
     for category, folder in category_folders.items():
         for filename in glob.glob(os.path.join(folder, '*.txt')):
             with open(filename, 'r', encoding='utf-8') as f:
                 texts.append(f.read())
-                labels.append(category)  # Ετικέτα για την κατηγορία
+                labels.append(category)  # Label for the category
 
     return texts, labels
 
-# Γενική συνάρτηση για εκτέλεση Naive Bayes (Multinomial ή Bernoulli) με επιλογή binary ή term occurrences
+# General function to run Naive Bayes (Multinomial or Bernoulli) with choice of binary or term occurrences
 def naive_bayes(nb_type, X_train, X_test, y_train, y_test, min_df, max_df):
     if nb_type == "multinomial":
         model_name = "Multinomial Naive Bayes with Term Occurrences"
@@ -37,22 +37,22 @@ def naive_bayes(nb_type, X_train, X_test, y_train, y_test, min_df, max_df):
     X_train_vect = vectorizer.fit_transform(X_train)
     X_test_vect = vectorizer.transform(X_test)
 
-    # Εκπαίδευση του μοντέλου
+    # Train the model
     start_time = time.time()
     model.fit(X_train_vect, y_train)
     y_pred = model.predict(X_test_vect)
     execution_time = time.time() - start_time
 
-    # Υπολογισμός μετρικών
+    # Compute metrics
     accuracy = accuracy_score(y_test, y_pred)
-    class_report = classification_report(y_test, y_pred, digits=4)  # Ακρίβεια 4 δεκαδικών ψηφίων
+    class_report = classification_report(y_test, y_pred, digits=4)  # Accuracy with 4 decimal places
     conf_matrix = confusion_matrix(y_test, y_pred)
 
-    # Εκτύπωση αποτελεσμάτων
+    # Print results
     print_results(model_name, execution_time, execution_time + execution_time_load_data, accuracy, conf_matrix, class_report)
 
 
-# Εκτύπωση των αποτελεσμάτων με σαφήνεια
+# Print results clearly
 def print_results(model_name, execution_time, execution_time_with_load, accuracy, conf_matrix, classification_rep):
     print("="*50)
     print(model_name)
@@ -67,26 +67,26 @@ def print_results(model_name, execution_time, execution_time_with_load, accuracy
     print("Classification Report:")
     print(classification_rep)
 
-# Σταθερές τιμές για κλάσεις και directories
+# Fixed values for classes and directories
 category_folders = {
     'neg': 'txt_sentoken/neg',
     'pos': 'txt_sentoken/pos'
 }
 
-# Σταθερές τιμές για test_size και document frequency parameters
+# Fixed values for test_size and document frequency parameters
 test_size = 0.50
 min_df = 0.04
 max_df = 0.82
-random_state=1992
+random_state = 1992
 
-# Φόρτωση δεδομένων
+# Load data
 print("\nLoading data...")
 start_time = time.time()
-texts, labels = load_data_from_folders(category_folders)  # Κλήση της συνάρτησης για φόρτωση δεδομένων
+texts, labels = load_data_from_folders(category_folders)  # Call the function to load data
 X_train, X_test, y_train, y_test = train_test_split(texts, labels, test_size=test_size, random_state=random_state)
 execution_time_load_data = time.time() - start_time
 print(f"Data loaded successfully in {execution_time_load_data:.4f} seconds.\n")
 
-# Εκτέλεση και αξιολόγηση των δύο μοντέλων με Term Occurrences και Binary Term Occurrences
-naive_bayes("multinomial",  X_train, X_test, y_train, y_test, min_df, max_df)  # Term Occurrences
-naive_bayes("bernoulli",  X_train, X_test, y_train, y_test, min_df, max_df)  # Binary Term Occurrences
+# Run and evaluate both models with Term Occurrences and Binary Term Occurrences
+naive_bayes("multinomial", X_train, X_test, y_train, y_test, min_df, max_df)  # Term Occurrences
+naive_bayes("bernoulli", X_train, X_test, y_train, y_test, min_df, max_df)    # Binary Term Occurrences
